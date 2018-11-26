@@ -11,3 +11,13 @@ class ToggleImportsCommand(sublime_plugin.TextCommand):
 
             if not view.fold(sublime.Region(start, end)):
                 view.unfold(sublime.Region(start, end))
+                
+        import_statements = view.find_all(r'^use ')
+
+        if len(import_statements) > 0:
+            start = view.line(import_statements[0]).begin() + 7
+            end = view.line(import_statements[-1]).end()
+
+            if not view.fold(sublime.Region(start, end)):
+                view.unfold(sublime.Region(start, end))
+
